@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV_Teddy_Fidel_Valencia_Castro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Exo:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cv-blue: #2563eb;
+            --cv-slate: #0f172a;
+        }
+
+        body { font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+        .font-exo { font-family: 'Exo', sans-serif; }
+
+        /* --- ESTILOS PARA PANTALLA (WEB) --- */
+        @media screen {
+            .main-container {
+                max-width: 1100px;
+                margin: 2rem auto;
+                border-radius: 1.5rem;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+            .aside-content { padding: 2.5rem; gap: 2rem; }
+            .main-content { padding: 3rem; gap: 2.5rem; }
+            .project-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .text-profile { font-size: 0.95rem; line-height: 1.7; }
+            .text-project-title { font-size: 0.9rem; }
+            .text-project-desc { font-size: 0.85rem; }
+        }
+
+        /* --- ESTILOS PARA IMPRESIÓN (PDF A4 UNA HOJA) --- */
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; padding: 0 !important; margin: 0 !important; }
+            
+            .main-container { 
+                display: flex !important; 
+                flex-direction: row !important; 
+                width: 100% !important; 
+                height: 296mm !important; /* Altura exacta A4 */
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+
+            aside { 
+                width: 30% !important; 
+                background-color: #0f172a !important; 
+                color: white !important; 
+                padding: 1.2rem !important; 
+                gap: 1.2rem !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            main { 
+                width: 70% !important; 
+                padding: 1.5rem !important; 
+                gap: 1.2rem !important;
+            }
+
+            .project-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem !important; }
+            .text-profile { font-size: 0.78rem !important; line-height: 1.2 !important; }
+            .text-project-title { font-size: 0.75rem !important; }
+            .text-project-desc { font-size: 0.7rem !important; line-height: 1.1 !important; }
+            .section-title { font-size: 0.9rem !important; margin-bottom: 0.4rem !important; }
+            .contact-item { font-size: 0.75rem !important; }
+            
+            @page { margin: 0; size: A4; }
+        }
+
+        /* Animación suave para los cards en web */
+        .project-card {
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .project-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 lg:p-8">
+
+    <div class="max-w-5xl mx-auto mb-6 flex justify-between items-center no-print px-4">
+        <a href="portafolio.html" class="flex items-center gap-2 text-slate-500 hover:text-blue-600 font-bold transition-colors">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            <span>Volver al Portafolio</span>
+        </a>
+        <button onclick="exportarPDF()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold shadow-xl flex items-center gap-3 transform active:scale-95 transition-all">
+            <i data-lucide="printer" class="w-5 h-5"></i>
+            Generar PDF Profesional
+        </button>
+    </div>
+
+    <div class="main-container bg-white flex flex-col md:flex-row overflow-hidden border border-slate-200">
+        
+        <aside class="aside-content w-full md:w-1/3 bg-slate-900 text-white flex flex-col">
+            <div class="mb-4">
+                <h1 class="text-2xl md:text-3xl font-black text-white font-exo uppercase leading-tight tracking-tighter">Teddy Fidel Valencia Castro</h1>
+                <p class="text-blue-400 font-bold mt-2 tracking-widest text-[10px] md:text-xs uppercase border-l-4 border-blue-500 pl-4">Ingeniero en TI / Arquitecto de Software</p>
+            </div>
+
+            <section class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700">
+                <div class="flex items-center gap-3 mb-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-blue-400"></i>
+                    <h2 class="text-xs font-black uppercase text-white">Inclusión Laboral</h2>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-[11px] text-slate-400">Tipo de Discapacidad:</p>
+                    <p class="text-xs font-bold text-blue-300">Visual (Retinosis Pigmentaria)</p>
+                    <div class="flex justify-between items-center mt-3 pt-2 border-t border-slate-700/50">
+                        <span class="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">Grado Certificado</span>
+                        <span class="text-xs font-black text-white bg-blue-600 px-3 py-0.5 rounded-full">49%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-3">
+                <h2 class="text-xs font-bold border-b border-slate-700 pb-2 flex items-center gap-2 uppercase text-blue-500 tracking-widest">
+                    <i data-lucide="user-circle" class="w-4 h-4"></i> Contacto
+                </h2>
+                <div class="space-y-3 contact-item">
+                    <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 text-blue-500"></i>
+                        <span class="text-[11px] break-all">teddyvalencia1997@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i data-lucide="phone" class="w-4 h-4 text-blue-500"></i>
+                        <span class="text-[11px]">0967879068</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-blue-500"></i>
+                        <span class="text-[11px]">Chone, Manabí, Ecuador</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i data-lucide="github" class="w-4 h-4 text-blue-500"></i>
+                        <span class="text-[11px]">github.com/Teddyfidel</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-xs font-bold border-b border-slate-700 pb-2 flex items-center gap-2 uppercase text-blue-500 tracking-widest">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Educación
+                </h2>
+                <div class="space-y-5">
+                    <div class="pl-4 border-l-2 border-blue-500">
+                        <p class="text-[10px] text-blue-400 font-black">2025 - PRESENTE</p>
+                        <h4 class="font-bold text-xs">Maestría en Educación e Innovación</h4>
+                        <p class="text-[10px] text-slate-400 italic">ULEAM (En curso)</p>
+                    </div>
+                    <div class="pl-4 border-l-2 border-blue-500">
+                        <p class="text-[10px] text-blue-400 font-black">2023</p>
+                        <h4 class="font-bold text-xs">Ingeniero en TI (Honores)</h4>
+                        <p class="text-[10px] text-slate-400 italic">ULEAM - Eloy Alfaro</p>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <main class="main-content w-full md:w-2/3 flex flex-col bg-white">
+            
+            <section>
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="p-2 bg-blue-100 rounded-lg text-blue-600"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                    <h2 class="section-title text-xl font-black text-slate-800 uppercase tracking-tighter">Perfil Profesional</h2>
+                </div>
+                <p class="text-profile text-slate-600 text-justify">
+                    Ingeniero en TI con más de una década de experiencia técnica. Especialista en arquitecturas escalables, ciberseguridad y automatización mediante Inteligencia Artificial. Enfoque integral en el desarrollo de soluciones robustas y la implementación de innovaciones pedagógicas para la transferencia de conocimiento técnico.
+                </p>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-2 bg-blue-100 rounded-lg text-blue-600"><i data-lucide="code" class="w-6 h-6"></i></div>
+                    <h2 class="section-title text-xl font-black text-slate-800 uppercase tracking-tighter">Proyectos & Freelance</h2>
+                </div>
+                
+                <div class="project-grid grid">
+                    <div class="space-y-2">
+                        <h3 class="text-[11px] font-black text-blue-600 uppercase border-l-2 border-blue-600 pl-3 mb-2">HTML5 / CSS3</h3>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Landing Page Corporativa</h4>
+                            <p class="text-project-desc text-slate-500">Diseño UX/UI responsive de alta conversión.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Admin Dashboard</h4>
+                            <p class="text-project-desc text-slate-500">Arquitectura modular con CSS Grid/Flexbox.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Email Marketing Pro</h4>
+                            <p class="text-project-desc text-slate-500">Maquetación optimizada multi-dispositivo.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="text-[11px] font-black text-yellow-600 uppercase border-l-2 border-yellow-600 pl-3 mb-2">JavaScript</h3>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Algoritmo Visualizer</h4>
+                            <p class="text-project-desc text-slate-500">Animación dinámica de estructuras de datos.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Inventory SPA</h4>
+                            <p class="text-project-desc text-slate-500">App reactiva con persistencia de estado.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">REST API Integration</h4>
+                            <p class="text-project-desc text-slate-500">Filtrado y búsqueda asíncrona avanzada.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="text-[11px] font-black text-red-600 uppercase border-l-2 border-red-600 pl-3 mb-2">C++ Systems</h3>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Motor de Cifrado</h4>
+                            <p class="text-project-desc text-slate-500">Encriptación binaria de baja latencia.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Graph Simulator</h4>
+                            <p class="text-project-desc text-slate-500">Rutas Dijkstra y BFS en entornos 2D.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">POS Core Engine</h4>
+                            <p class="text-project-desc text-slate-500">Gestión de transacciones en archivos binarios.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="text-[11px] font-black text-indigo-600 uppercase border-l-2 border-indigo-600 pl-3 mb-2">Python & IA</h3>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Predictive Market Bot</h4>
+                            <p class="text-project-desc text-slate-500">Análisis de series temporales y trading AI.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">Smart Scraper Pro</h4>
+                            <p class="text-project-desc text-slate-500">Extracción de Big Data con Pandas/Numpy.</p>
+                        </div>
+                        <div class="project-card p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                            <h4 class="text-project-title font-bold text-slate-800">NLP Classifier</h4>
+                            <p class="text-project-desc text-slate-500">Detección de intenciones basada en Transformers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 gap-8">
+                <div>
+                    <h2 class="text-sm font-black text-slate-800 uppercase mb-4 border-b-2 border-slate-100 pb-2 flex items-center gap-2">
+                        <i data-lucide="award" class="w-4 h-4 text-blue-600"></i> Trayectoria
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="relative pl-4 border-l-2 border-slate-200">
+                            <div class="absolute -left-[5px] top-1 w-2 h-2 bg-blue-600 rounded-full"></div>
+                            <h4 class="font-bold text-[11px] text-slate-800">Docente de Especialidades</h4>
+                            <p class="text-[10px] text-slate-500 italic">Los Naranjos | 2024 - Actualidad</p>
+                        </div>
+                        <div class="relative pl-4 border-l-2 border-slate-200">
+                            <div class="absolute -left-[5px] top-1 w-2 h-2 bg-slate-300 rounded-full"></div>
+                            <h4 class="font-bold text-[11px] text-slate-800">Pasante de Desarrollo</h4>
+                            <p class="text-[10px] text-slate-500 italic">NMC RESEARCH | 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-sm font-black text-slate-800 uppercase mb-4 border-b-2 border-slate-100 pb-2 flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4 text-blue-600"></i> Referencias
+                    </h2>
+                    <div class="space-y-2">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <p class="font-bold text-[11px] text-slate-800">Dr. Joel Pinargote</p>
+                                <p class="text-[9px] text-slate-500 leading-none">Catedrático ULEAM</p>
+                            </div>
+                            <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded">0985968151</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <p class="font-bold text-[11px] text-slate-800">Mg. Miguel Castro</p>
+                                <p class="text-[9px] text-slate-500 leading-none">Rector U.E. R. Chone</p>
+                            </div>
+                            <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded">0985383067</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="max-w-5xl mx-auto mt-8 text-center no-print">
+        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+            © 2026 Teddy Valencia Castro | Arquitecto de Software
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function exportarPDF() {
+            const originalTitle = document.title;
+            document.title = "CV_Teddy_Fidel_Valencia_Castro";
+            window.print();
+            setTimeout(() => { document.title = originalTitle; }, 1000);
+        }
+    </script>
+</body>
+</html>
